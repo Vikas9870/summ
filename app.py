@@ -1,6 +1,6 @@
 import gradio as gr
 from transformers import pipeline
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # Initialize Flask app
@@ -20,9 +20,23 @@ def summarize_text(text):
 # Create the Gradio interface
 iface = gr.Interface(fn=summarize_text, inputs="text", outputs="text")
 
-# Launch Gradio interface in the Flask app
+# Mount Gradio interface in the Flask app
 iface.mount(app)
+
+# Define a POST route to summarize text
+@app.route("/summarize", methods=["POST"])
+def summarize():
+    # Get the text from the request
+    data = request.get_json()
+    text = data.get("text", "")
+    
+    # Call the summarization function
+    summary = summarize_text(text)
+    
+    # Return the summary in the response
+    return jsonify({"summary": summary})
 
 # Run the Flask app
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
+
