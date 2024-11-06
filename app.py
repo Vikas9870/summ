@@ -3,7 +3,7 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 import nltk
-
+from flask_cors import CORS
 # Download Punkt model if not available
 try:
   nltk.data.find('tokenizers/punkt')
@@ -11,7 +11,7 @@ except LookupError:
   nltk.download('punkt')
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/summarize', methods=['POST'])
 def summarize():
   """
