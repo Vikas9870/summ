@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: summarizer-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    instanceType: "standard"
+    envVars:
+      - key: STREAMLIT_SERVER_PORT
+        value: "80"
+    autoDeploy: true
