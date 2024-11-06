@@ -1,3 +1,5 @@
 transformers
 torch
 gradio   # Use streamlit here if you’re using Streamlit
+flask
+
