@@ -9,7 +9,7 @@ try:
   nltk.data.find('tokenizers/punkt')
 except LookupError:
   nltk.download('punkt')
-
+nltk.download('punkt_tab')
 app = Flask(__name__)
 CORS(app)
 @app.route('/summarize', methods=['POST'])
